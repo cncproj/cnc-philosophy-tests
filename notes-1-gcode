@@ -1,6 +1,8 @@
 
 toc:
-    Add to generated gcode by jscut.org:
+    Add to generated gcode by jscut.org
+    Workaround lost previous position in candle software
+    Set safe position in candle
 
 
 Add to generated gcode by jscut.org:
@@ -27,6 +29,27 @@ Workaround lost previous position in candle software
   then reset home position.
 
 
-Set safe position
+Set safe position in candle
   in "machine information"/"safe position commands" box, type:
       G53G00G90Z0.;G53G90X0.Y0.
+
+
+Header and footer
+  ref: https://cncphilosophy.com/g-code-programming-for-dummies/
+
+  header
+      % (Identifies the start of the program)
+      ODRILL (program name) 
+      G17 G20 G40 G49 G80 G90 (safety line establishing important G codes)
+      T1 M06 (Tool call and tool change commands)
+      G00 G54 X0. Y0. S2000 M03 (X and Y pre-position line)
+      G43 H1 Z1. (Tool length offset command and Z pre-position line)
+
+  footer
+      G00 Z1. (move up in Z 1” above the Z datum)
+      M05 (stop the spindle)
+      G91 G28 X0. Y0. Z0. (rapid move to home position)
+      G90 (re-establish absolute programming mode)
+      M30 (finish program and rewind to the beginning and stop)
+      % (identifies the end of the program)
+
