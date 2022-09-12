@@ -1,0 +1,32 @@
+
+toc:
+    Add to generated gcode by jscut.org:
+
+
+Add to generated gcode by jscut.org:
+  ref: https://cncphilosophy.com/svg-to-g-code/
+
+  to the beginning
+      M03 S1000
+
+  to the end
+      G1 Z0.1000 F50
+      M05
+      M2
+
+
+Workaround lost previous position in candle software
+  ref: https://cncphilosophy.com/candle-software-offset-problem/
+
+  before turning off, see the current machine coordinates at work offset 0. e.g. 
+    -27.33 -72.759 -15.7
+
+  when powered back on, clear work offset, type each the followings and press go in console:
+      G00 G54 X-27.33 Y-72.759
+      G00 G54 Z-15.765
+  then reset home position.
+
+
+Set safe position
+  in "machine information"/"safe position commands" box, type:
+      G53G00G90Z0.;G53G90X0.Y0.
