@@ -1,0 +1,40 @@
+
+
+https://cncphilosophy.com/candle-grbl-software-tutorial/
+
+safe position command: G53G00G90Z0.;G53G90X0.Y0.
+
+
+
+https://cncphilosophy.com/candle-software-offset-problem/
+
+if candle does not restore previous origin, 
+
+    [1] write down machine coordinates when setting previous work datums. 
+    [2] always move back to safe machine position at 0,0,0 before power down.
+    [3] when re-opened candle, check whether coordinates match. 
+        if not, 
+            [2.1] zero the work coordinates. 
+            [2.2] type "g00 g54 X<work-x-zero> Y<work-y-zero>" and press arrow key.
+            [2.3] type "g00 g54 z<work-z-zero>" and press arrow key. 
+            [2.4] now it is at work origin. zero the work coordinates again
+
+
+notes: 
+
+  M3  ---spindle on.
+  M5  ---spindle off.
+  M2  ---program end. stop machine.
+  M30 ---same as M2
+
+  G53  ---cancel any G54/G55/G56/G57/G58/G59
+  G21  ---unit mm
+  G90  ---absolute coordinates
+  G28.1 ---set work origin.
+  G28   ---go to work origin.
+
+  G40   ---cutter compensation off. grbl does not support this.
+  G49   ---cancel tool length offset.
+  G80   ---cancel canned cycle. grbl does not support this.
+
+
